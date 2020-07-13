@@ -1,7 +1,7 @@
 ---
 title: HTTP Alternative Services That Do Not Support Desired Extensions
 abbrev: "Alt-Svc Extension Unsupported"
-docname: draft-pardue-alt-svc-ext-unsupported
+docname: draft-pardue-alt-svc-ext-unsupported-latest
 category: std
 
 ipr: trust200902
@@ -56,9 +56,10 @@ unlikely to be a hard failure cases. However, Alt-Svc is the primary method of
 switching between HTTP/2 and HTTP/3 and there is a possibility that extensions
 offered in one version of a connection are not provided in another. It is also
 feasible that support for extension points are not unilaterally deployed across
-a fleet of servers, whether in the same organization domain or not; a client
-might encounter problems with the Alternative could fail due to synchronization
-or coordination issues between the origin and the Alternative.
+a fleet of servers, whether in the same organization domain or not. A client
+might encounter problems with the Alternative due to permanent error or
+transient erro due to synchronization or coordination issues between the origin
+and the Alternative.
 
 Advertising Alternative Services has quite a low barrier and does require up
 front coordination, meaning it is quite easy for an origin administrator to
@@ -80,6 +81,15 @@ such as identifying configuration errors.
 
 {::boilerplate bcp14}
 
+# Detecting and Signalling
+
+HTTP/2 and HTTP/3 endpoints might use various means to detect that a desired
+extension is not supported on the connection, no specific measures are
+prescribed by this document.
+
+When an endpoint detects that a desired extension is unsupported it MAY
+terminate a stream or a connection with the error code EXTENSION_UNSUPPORTED or
+H3_EXTENSION_UNSUPPORTED.
 
 # HTTP/2 Error Code
 
